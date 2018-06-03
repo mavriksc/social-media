@@ -19,9 +19,9 @@ public class SocialMediaApplication {
 
     @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepository, PasswordEncoder encoder){
+        //create default user
         return strings->{
             if(userRepository.count()==0){
-             //create default user
                 Set<Role> roles = new HashSet<>();
                 roles.add(new Role(Role.Roles.ADMIN));
                 roles.add(new Role(Role.Roles.USER));
@@ -32,6 +32,7 @@ public class SocialMediaApplication {
                 u.setEnabled(true);
                 u.setExpired(false);
                 u.setLocked(false);
+                u.setExpiredCreds(false);
                 userRepository.save(u);
                 log.info(String.format("created user %s",u.getUsername()));
             }
