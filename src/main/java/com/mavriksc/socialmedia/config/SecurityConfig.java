@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userDetailsService;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -22,22 +23,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http
-           .authorizeRequests()
-               .antMatchers("/**")
-               .permitAll()
-           .and()
-               .authorizeRequests()
-               .antMatchers("/h2-console/**")
-               .permitAll()
-           .and()
-               .formLogin()
-               .permitAll();
+        http
+            .authorizeRequests()
+            .antMatchers("/**")
+            .permitAll()
+            .and()
+            .authorizeRequests()
+            .antMatchers("/h2-console/**")
+            .permitAll()
+            .and()
+            .formLogin()
+            .permitAll();
 
-       // these things are needed to use the console
+        // these things are needed to use the console
         // and at least the 1(one) matcher above and maybe the other one too.
-       http.csrf().disable();
-       http.headers().frameOptions().disable();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Override
@@ -46,10 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
-        return  authProvider;
+        return authProvider;
     }
 }

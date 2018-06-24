@@ -27,12 +27,14 @@ public class Role implements GrantedAuthority {
         this.role = role.toString();
     }
 
-    public Role(){
+    public Role() {
 
-    };
+    }
 
-    public enum Roles{
-        ADMIN,USER
+    ;
+
+    public enum Roles {
+        ADMIN, USER
     }
 
 }

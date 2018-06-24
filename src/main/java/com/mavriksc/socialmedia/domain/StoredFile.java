@@ -24,14 +24,14 @@ public class StoredFile {
     private Set<Tag> userTags;
 
     @OneToMany(
-        mappedBy = "file",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
+            mappedBy = "file",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private Set<FileTag> allTags = new HashSet<>();
 
-    public void addTag(Tag tag){
-        FileTag fileTag = new FileTag(this,tag);
+    public void addTag(Tag tag) {
+        FileTag fileTag = new FileTag(this, tag);
         allTags.add(fileTag);
         tag.getFiles().add(fileTag);
     }
@@ -55,7 +55,7 @@ public class StoredFile {
         if (userTags == null) {
             userTags = new HashSet<>(allTags.stream()
                     .filter(ft -> ft.getTag().getType() == TagType.USER)
-                    .map(ft-> new Tag(ft.getTag().getValue()))
+                    .map(ft -> new Tag(ft.getTag().getValue()))
                     .collect(Collectors.toSet()));
             return userTags;
         } else {

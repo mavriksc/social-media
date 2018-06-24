@@ -5,6 +5,7 @@ import com.mavriksc.socialmedia.domain.Tag;
 import com.mavriksc.socialmedia.dto.FileDTO;
 import com.mavriksc.socialmedia.repository.StoredFileRepository;
 import com.mavriksc.socialmedia.repository.TagRepository;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Log
 public class FileService {
     @Autowired
     private StoredFileRepository storedFileRepository;
@@ -21,9 +23,9 @@ public class FileService {
 
 
     @Transactional
-    public void saveFile(FileDTO file){
+    public void saveFile(FileDTO file) {
+        log.info(String.format("Creating new File Named: %s", file.getFilename()));
         // create new tags;
-        createNewTags(file);
         StoredFile newFile = new StoredFile();
 
         createNewTags(file).forEach(t -> newFile.addTag(t));
@@ -36,9 +38,10 @@ public class FileService {
         List<Tag> tags = new ArrayList<>();
 
         file.getTags().forEach(tag -> {
-            Tag findIt =  tagRepository.findByValue(tag.getValue());
-            if (findIt==null){
+            Tag findIt = tagRepository.findByValue(tag.getValue());
+            if (findIt == null) {
                 findIt = tagRepository.save(new Tag(tag.getValue()));
+                log.info(String.format("Creating new Tag: %s", findIt.getValue()));
             }
             tags.add(findIt);
         });

@@ -18,9 +18,9 @@ public class Invitation {
     private Date expiration;
     private Boolean used;
 
-    public Invitation(){
+    public Invitation() {
         code = UUID.randomUUID();
-        expiration  = Calendar.getInstance().getTime();
+        expiration = Calendar.getInstance().getTime();
         used = false;
     }
 }

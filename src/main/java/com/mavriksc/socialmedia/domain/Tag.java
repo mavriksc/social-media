@@ -1,7 +1,6 @@
 package com.mavriksc.socialmedia.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -35,11 +34,11 @@ public class Tag {
     )
     private List<FileTag> files = new ArrayList<>();
 
-    public Tag(String value){
-       this(value,TagType.USER);
+    public Tag(String value) {
+        this(value, TagType.USER);
     }
 
-    public Tag(String value,TagType type){
+    public Tag(String value, TagType type) {
         this.value = value;
         this.type = type;
     }

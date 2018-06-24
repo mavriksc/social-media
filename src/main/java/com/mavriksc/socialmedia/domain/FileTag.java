@@ -28,6 +28,7 @@ public class FileTag {
         this.tag = tag;
         this.id = new FileTagId(file.getId(), tag.getId());
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,7 +45,6 @@ public class FileTag {
     public int hashCode() {
         return Objects.hash(file.getUuid(), tag.getValue());
     }
-
 
 
 }
