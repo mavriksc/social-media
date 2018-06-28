@@ -23,15 +23,13 @@ public class FileService {
 
 
     @Transactional
-    public void saveFile(FileDTO file) {
+    public FileDTO saveFile(FileDTO file) {
         log.info(String.format("Creating new File Named: %s", file.getFilename()));
-        // create new tags;
         StoredFile newFile = new StoredFile();
-
         createNewTags(file).forEach(t -> newFile.addTag(t));
         newFile.setOwner(file.getOwner());
         newFile.setFilename(file.getFilename());
-        storedFileRepository.save(newFile);
+        return new FileDTO(storedFileRepository.save(newFile));
     }
 
     private List<Tag> createNewTags(FileDTO file) {

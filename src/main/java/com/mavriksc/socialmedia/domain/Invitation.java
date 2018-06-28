@@ -15,12 +15,12 @@ public class Invitation {
     @Id
     private Long id;
     private UUID code;
-    private Date expiration;
+    private Date created;
     private Boolean used;
 
     public Invitation() {
         code = UUID.randomUUID();
-        expiration = Calendar.getInstance().getTime();
+        created = Calendar.getInstance().getTime();
         used = false;
     }
 }

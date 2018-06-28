@@ -79,5 +79,9 @@ public class StoredFile {
         return Objects.hash(uuid);
     }
 
+    public StoredFile(){
+        uuid = UUID.randomUUID();
+    }
+
 
 }
